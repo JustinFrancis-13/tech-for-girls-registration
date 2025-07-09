@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech For Girls Registration</title>
+
+<style>
+:root {
+  --primary-color: #ff69b4;
+  --secondary-color: #fff0f6;
+  --text-color: #333;
+  --button-hover: #e05699;
+  --dark-bg: #1f2235;
+  --dark-text: #f1f1f1;
+  --dark-form: #2c2f4a;
+  --dark-ball: rgba(255, 255, 255, 0.08);
+  --whatsapp-color: #25d366;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 20px;
+  overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+.container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: 2px solid var(--primary-color);
+  transition: background 0.3s ease;
+  z-index: 1;
+  position: relative;
+}
+
+.dark-mode .container {
+  background-color: var(--dark-form);
+}
+
+h1 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  transition: all 0.3s ease;
+}
+
+.dark-mode h1 {
+  color: var(--dark-text);
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+input, button {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px var(--primary-color);
+}
+
+button {
+  margin-top: 15px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--button-hover);
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#shareCounter {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.mode-toggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  font-size: 14px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.background-balls {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ball {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float 8s infinite ease-in-out alternate;
+  background-color: var(--primary-color);
+}
+
+.dark-mode .ball {
+  background-color: var(--dark-ball);
+}
+
+@keyframes float {
+  0% { transform: translateY(0) translateX(0) rotate(0); }
+  50% { transform: translateY(-100px) translateX(50px) rotate(180deg); }
+  100% { transform: translateY(0) translateX(0) rotate(360deg); }
+}
+
+#thankYouMsg {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  animation: popUp 0.8s ease forwards;
+}
+
+#thankYouMsg img {
+  width: 100%;
+  max-width: 250px;
+  border-radius: 10px;
+  margin-top: 20px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes popUp {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+#whatsappBtn {
+  background-color: var(--whatsapp-color);
+}
+
+#whatsappBtn:hover {
+  background-color: #1ebe5b;
+}
+
+@media (max-width: 500px) {
+  .container {
+    margin: 20px 10px;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+}
+</style>
+</head>
+
+<body onload="initPage()">
+
+<div class="background-balls"></div>
+<button class="mode-toggle" onclick="toggleMode()">🌙</button>
+
+<h1 id="mainHeading">Tech For Girls Registration</h1>
+
+<div class="container">
+  <form id="registrationForm">
+    <label>Name:</label>
+    <input type="text" id="name" required />
+
+    <label>Phone:</label>
+    <input type="number" id="phone" required />
+
+    <label>Email:</label>
+    <input type="email" id="email" required />
+
+    <label>College/Department:</label>
+    <input type="text" id="college" required />
+
+    <label>Upload Screenshot:</label>
+    <input type="file" id="screenshot" accept="image/*" required />
+
+    <button type="button" id="whatsappBtn">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="height:20px; vertical-align:middle; margin-right:8px;">
+      Share on WhatsApp
+    </button>
+
+    <p id="shareCounter">Click count: 0/5</p>
+
+    <button type="submit" id="submitBtn" disabled>✅ Submit Registration</button>
+  </form>
+
+  <div id="thankYouMsg">
+    <img src="women.jpg" alt="Happy Tech Girl" />
+    <br/>🎉 Your submission has been recorded.<br/>
+    Thank you for joining the <strong>Tech for Girls</strong> community! 🌟
+  </div>
+</div>
+
+<script>
+function toggleMode() {
+  document.body.classList.toggle('dark-mode');
+}
+
+function initPage() {
+  localStorage.removeItem("submitted");
+  localStorage.removeItem("shareCount");
+  clickCount = 0;
+  generateBubbles();
+  updateShareUI();
+}
+
+function generateBubbles() {
+  const colors = ['#ff69b4', '#ffe6f2', '#ff85c1', '#ff4dd2'];
+  const container = document.querySelector('.background-balls');
+  container.innerHTML = "";
+  for (let i = 0; i < 15; i++) {
+    const ball = document.createElement('div');
+    ball.className = 'ball';
+    const size = Math.random() * 50 + 20;
+    ball.style.width = ball.style.height = size + 'px';
+    ball.style.background = colors[Math.floor(Math.random() * colors.length)];
+    ball.style.top = Math.random() * 100 + '%';
+    ball.style.left = Math.random() * 100 + '%';
+    ball.style.animationDuration = (5 + Math.random() * 5) + 's';
+    ball.style.animationDelay = (Math.random() * 2) + 's';
+    container.appendChild(ball);
+  }
+}
+
+let clickCount = 0;
+
+const shareBtn = document.getElementById("whatsappBtn");
+const submitBtn = document.getElementById("submitBtn");
+const shareCounter = document.getElementById("shareCounter");
+const form = document.getElementById("registrationForm");
+const thankYouMsg = document.getElementById("thankYouMsg");
+
+const MAX_SHARES = 5;
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzAifR4bj8J4kE0GeMgsRzOhBnVjwWFk0FAtJKubvJzRCo76JOJGVful9R-6aD11UpusQ/exec";
+
+function updateShareUI() {
+  shareCounter.textContent = `Click count: ${clickCount}/${MAX_SHARES}`;
+  if (clickCount >= MAX_SHARES) {
+    submitBtn.disabled = false;
+  }
+}
+
+shareBtn.addEventListener("click", () => {
+  if (clickCount < MAX_SHARES) {
+    clickCount++;
+    updateShareUI();
+
+    const message = `🌟 Hey! I just joined the amazing "Tech For Girls" community 💻👩‍💻 — empowering women in tech. 🚀
+✨ Join me and let's grow together: [insert your link here]`;
+    window.open(`https://web.whatsapp.com/send?text=${encodeURIComponent(message)}`, "_blank");
+
+    if (clickCount === MAX_SHARES) {
+      showToast("🎉 Sharing complete! You may now submit.");
+    }
+  } else {
+    showToast("✅ Already shared 5 times.");
+  }
+});
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  if (clickCount < MAX_SHARES) {
+    alert("Please complete sharing on WhatsApp (5 times) before submitting.");
+    return;
+  }
+
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const college = document.getElementById("college").value.trim();
+
+  if (!name || !phone || !email || !college) {
+    alert("Please fill in all fields.");
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Submitting...";
+
+  try {
+    const response = await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ name, phone, email, college })
+    });
+
+    if (response.ok) {
+      disableForm();
+      showThankYou();
+    } else {
+      alert("⚠️ Submission failed. Please try again later.");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Submit Registration";
+    }
+  } catch (error) {
+    alert("❌ Error: " + error.message);
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit Registration";
+  }
+});
+
+function disableForm() {
+  form.querySelectorAll("input, button").forEach(el => el.disabled = true);
+}
+
+function showThankYou() {
+  form.style.display = "none";
+  thankYouMsg.style.display = "block";
+}
+
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.textContent = message;
+  toast.style.cssText =
+    `position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+    background:#4b7bec;color:#fff;padding:10px 20px;border-radius:6px;z-index:9999;`;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+</script>
+
+</body>
+</html>

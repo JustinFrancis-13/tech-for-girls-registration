@@ -1,0 +1,63 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f4ff;
+  padding: 20px;
+}
+
+form {
+  max-width: 400px;
+  background: #fff;
+  padding: 20px;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #4b7bec;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3867d6;
+}
+
+#shareCounter {
+  text-align: center;
+}
+@keyframes expandAndShrink {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(4) translateY(20%);
+    color: var(--primary-color);
+    letter-spacing: 8px;
+  }
+  60% {
+    transform: scale(0.8);
+  }
+  80% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+h1.animate-heading {
+  animation: expandAndShrink 2s ease forwards;
+}
+
